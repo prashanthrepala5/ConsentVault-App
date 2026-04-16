@@ -39,6 +39,30 @@ ConsentVault is sector-agnostic. While we are demoing this for Fintech, the exac
 
 ---
 
+## 🚀 How to Run & Test
+
+To test the entire system end-to-end (connecting the wallet, paying the gas fee, and confirming the backend database update):
+
+1. **Fire up the Local Server:**
+   ```bash
+   npm run dev
+   ```
+   Open up your browser and go to `http://localhost:3000`.
+
+2. **Connect & Trigger Consent:**
+   * Click the **Connect Wallet** button on the website and scan the QR code using your **Pera Wallet** mobile app (ensure you are on Testnet so you don't spend real ALGO).
+   * Navigate to your **Dashboard**.
+   * Toggle one of the App Permissions (for example, turn on "View Profile" for a connected app).
+   * A notification should pop up saying it's initiating the transaction. Your Pera app will ask you to sign a `0.01 ALGO` transaction (the fee). **Sign it.**
+
+3. **Verify the "Trustless" Magic!**
+   * Once signed, the browser shoots a request to `/api/permissions` containing your Wallet Address and the transaction ID.
+   * Under the hood, the Next.js API route pings the Algorand Node to verify that the transaction actually exists and that exactly 0.01 ALGO was paid.
+   * Only after the blockchain confirms it was legit, `lib/prisma.ts` connects to the **Neon PostgreSQL database** and saves your new permission status.
+   * Refresh the page! Your toggle switch should stay turned ON, proving it successfully retrieved the newly stored state from the Database.
+
+---
+
 ## 🔐 Important Code Context
 
 While the extensive boilerplate code has been omitted for brevity, the core logic relies on validating an Algorand transaction before updating any backend states. Here is the critical snippet verifying the on-chain permission transaction:
