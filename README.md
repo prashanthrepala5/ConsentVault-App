@@ -1,6 +1,13 @@
-# ConsentvaultApp 
+# ConsentvaultApp
 
-**🔗 [Live Demo](https://ripe-regions-unite.loca.lt)** | [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/prashanthrepala5/ConsentVault-App)
+> A decentralized, trustless Consent Manager built on Algorand to solve India's DPDP Act compliance. It replaces standard "I Agree" buttons with immutable, on-chain transactions to grant users granular privacy control while giving companies a fraud-proof audit trail for regulators.
+
+**Topics:** `algorand` • `nextjs` • `blockchain` • `privacy` • `dpdp-act` • `regtech` • `consent-management` • `compliance` • `smart-contracts` • `prisma`
+
+---
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/prashanthrepala5/ConsentVault-App)
+
 ## 1. Relevance of the Problem
 With the rollout of India’s Digital Personal Data Protection (DPDP) Act, "Data Fiduciaries" (companies) are facing a massive compliance hurdle: they must prove that every piece of user consent was obtained freely and specifically. Right now, this "proof" lives in centralized databases controlled by the companies themselves. This creates a conflict of interest—logs can be tampered with, lost, or disputed.
 
