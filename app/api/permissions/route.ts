@@ -1,9 +1,7 @@
 export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 import { getAlgodClient } from '@/lib/algorand';
-
-const prisma = new PrismaClient();
 
 // The address designated to receive the 0.01 ALGO payment. This could also be logic-dependent.
 const TREASURY_ADDRESS = process.env.NEXT_PUBLIC_TREASURY_ADDRESS || 'DEMO_TREASURY_ADDRESS_CHANGE_ME';
