@@ -61,3 +61,50 @@ if (isPayment && amount >= 10000) {
   });
 }
 ```
+
+---
+
+## 📂 Project Structure
+
+```text
+ConsentVault-App/
+├── app/
+│   ├── api/
+│   ├── consent/
+│   ├── dashboard/
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── audit/
+│   ├── consent/
+│   ├── dashboard/
+│   ├── landing/
+│   └── ui/               # shadcn/ui components
+├── contracts/            # Algorand Smart Contracts
+│   ├── approval.py
+│   ├── clear.py
+│   └── deploy.py
+├── docs/                 # Documentation
+│   ├── architecture.md
+│   └── dpdp-compliance.md
+├── hooks/
+├── lib/                  # Utilities & Connections
+│   ├── algorand.ts       # Algorand Client Init
+│   ├── wallet-context.tsx
+│   └── utils.ts
+├── prisma/
+│   └── schema.prisma     # PostgreSQL Database Schema
+├── public/
+├── scripts/
+│   ├── deploy.js
+│   ├── indexer-query.js
+│   └── test-consent.js
+├── styles/
+│   └── globals.css
+├── package.json
+├── tailwind.config.ts
+├── tsconfig.json
+└── README.md
+```
