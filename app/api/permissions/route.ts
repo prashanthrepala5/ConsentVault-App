@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
 
     // 1. Verify the transaction on-chain
     const client = getAlgodClient();
-    let txInfo;
+    let txInfo: any;
     try {
       txInfo = await client.pendingTransactionInformation(txid).do();
     } catch (e) {
