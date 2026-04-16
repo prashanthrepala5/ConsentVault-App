@@ -4,6 +4,8 @@
 
 **Topics:** `algorand` • `nextjs` • `blockchain` • `privacy` • `dpdp-act` • `regtech` • `consent-management` • `compliance` • `smart-contracts` • `prisma`
 
+**🔗 [Live Demo](https://consent-vault-app.vercel.app/)**
+
 ---
 
 ## 1. Relevance of the Problem
@@ -99,6 +101,21 @@ ConsentVault bridges the Algorand blockchain with a highly-scalable PostgreSQL d
 
 To ensure native compatibility with Serverless functions (like Vercel API routes), we strictly process database queries utilizing raw **Prisma PostgreSQL Driver Adapters** (`@prisma/adapter-pg`). 
 This means standard connection string logic is entirely isolated. The application explicitly manages database connection pooling inside `lib/prisma.ts` before the API routes resolve. This bleeding-edge architecture completely prevents connection-timeout crashes in Vercel serverless setups and enables rapid, strict data validation.
+
+---
+
+## 🔗 App to Database Mapping (How It Works)
+
+Here is exactly how the user experience on the live website maps to the data architecture laid out in `prisma/schema.prisma`:
+
+1. **The `Wallet` Model (User Identity):** When a user hits **"Connect Wallet"** and scans with Pera, they share their public Algorand address. Prisma looks at the `model Wallet` in the schema and creates/finds a row securely identifying them.
+2. **The `ConnectedApp` Model (The Partners):** The dashboard displays third-party platforms asking for data. These apps populate the `model ConnectedApp`, ensuring infinite scalability to add new ecosystem partners dynamically.
+3. **The `Permission` Model (The Trustless Core):** When a user switches a boolean flag (e.g., "Allow Notification Access"):
+   * **The Blockchain Step:** The UI forces them to sign an Algorand transaction (e.g., 0.01 ALGO verification fee).
+   * **The Prisma Step:** Once confirmed, the backend leverages Prisma to update the `model Permission` table, specifically flagging `viewProfile: true`.
+   * **The Audit Trail:** Most importantly, it saves the `lastUpdatedTx` (the unique Algorand Transaction ID) directly in the database row. 
+
+The website is physically incapable of finalizing a boolean permission flag unless it successfully intercepts a valid on-chain transaction hash. That precise interaction is what makes this a decentralized, legally-compliant Consent Manager.
 
 ---
 
