@@ -1,0 +1,5 @@
+# ConsentVault Smart Contract Dependencies
+# Install with: pip install -r requirements.txt
+
+pyteal>=0.20.0
+py-algorand-sdk>=2.0.0

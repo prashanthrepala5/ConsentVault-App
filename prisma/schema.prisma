@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Wallet {
+  id          String       @id @default(uuid())
+  address     String       @unique
+  permissions Permission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model ConnectedApp {
+  id          String       @id @default(uuid())
+  name        String       @unique
+  description String?
+  iconUrl     String?
+  permissions Permission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Permission {
+  id             String       @id @default(uuid())
+  walletId       String
+  connectedAppId String
+  
+  // Broad Permissions
+  viewProfile    Boolean      @default(false)
+  viewActivity   Boolean      @default(false)
+  receiveNotifs  Boolean      @default(false)
+
+  // Transaction info for payment
+  lastUpdatedTx  String?      // the transaction ID holding the 0.01 ALGO payment
+  
+  wallet         Wallet       @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  connectedApp   ConnectedApp @relation(fields: [connectedAppId], references: [id], onDelete: Cascade)
+  
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([walletId, connectedAppId])
+}
